@@ -1,12 +1,11 @@
-/*eslint-disable*/
 import {AnyAction, PayloadAction} from '@reduxjs/toolkit';
-import {call, put, PutEffect, takeLatest} from 'redux-saga/effects';
+import {call, CallEffect, put, PutEffect, takeLatest} from 'redux-saga/effects';
 
 import {authenticate, authenticateFailure, authenticatePending, checkAuthenticate, fetchAuthenticate, logout} from 'src/store/auth/slice';
 import {SendsayCustom} from 'src/services/sendsay';
 import {AuthValues} from 'src/types/auth';
 
-function* checkAuthenticateSaga(): any {
+function* checkAuthenticateSaga(): Generator<PutEffect<AnyAction> | CallEffect<void>, void, {account: string; sublogin: string}> {
   try {
     const data = yield SendsayCustom.sendsay.request({
       action: 'pong',
@@ -25,7 +24,7 @@ function* checkAuthenticateSaga(): any {
   }
 }
 
-function* authenticateSaga({payload}: PayloadAction<AuthValues>): Generator<PutEffect<AnyAction>, void, AuthValues> {
+function* authenticateSaga({payload}: PayloadAction<AuthValues>): Generator<PutEffect<AnyAction>> {
   yield put(authenticatePending(true));
   try {
     yield SendsayCustom.sendsay.login({
