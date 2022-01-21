@@ -1,0 +1,55 @@
+.TextField {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  --color-gray: rgba(0, 0, 0, 0.2);
+  --color-black: rgba(0, 0, 0, 0.4);
+  --color-red: #cf2c00;
+}
+
+.TextField-label {
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.TextField-label--withError {
+  color: var(--color-red);
+}
+
+.TextField-input {
+  height: 40px;
+  font-size: 18px;
+  font-weight: 400;
+  border: 1px solid;
+  border-color: var(--color-gray);
+  border-radius: 5px;
+}
+
+.TextField-input--withError {
+  border-color: var(--color-red);
+  box-shadow: 0px 0px 5px rgba(207, 44, 0, 0.5);
+}
+
+.TextField-input:hover {
+  border: 1px solid var(--color-black);
+}
+.TextField-input:focus {
+  outline: 3px solid var(--color-gray);
+}
+
+.TextField-input--withError:hover {
+  border-color: var(--color-red);
+}
+
+.TextField-input--withError:focus {
+  border-color: var(--color-red);
+  outline: none;
+}
+
+.TextField-optionalField {
+  font-size: 12px;
+  font-weight: 400;
+  color: #999999;
+}
