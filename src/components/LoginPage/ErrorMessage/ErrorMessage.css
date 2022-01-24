@@ -1,0 +1,40 @@
+.ErrorMessage {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(207, 44, 0, 0.1);
+  border-radius: 5px;
+
+  --icon-size: 24px;
+  --head-gap: 8px;
+}
+
+.ErrorMessage-head {
+  display: flex;
+  align-items: center;
+  column-gap: var(--head-gap);
+}
+
+.ErrorMessage-head-icon {
+  height: var(--icon-size);
+  width: var(--icon-size);
+  object-fit: cover;
+  object-position: center;
+}
+
+.ErrorMessage-head-text {
+  font-size: 18px;
+  font-weight: 400;
+  color: #cf2c00;
+}
+
+.ErrorMessage-body {
+  margin-left: calc(var(--icon-size) + var(--head-gap));
+  overflow-x: auto;
+}
+
+.ErrorMessage-body-text {
+  font-size: 12px;
+  font-weight: 400;
+  color: #cf2c00;
+}
