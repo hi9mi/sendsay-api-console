@@ -1,37 +1,28 @@
-import {useDispatch, useSelector} from 'react-redux';
-import {Navigate, useRoutes} from 'react-router-dom';
+import './App.css';
 
-import {LoginPage} from 'src/containers/LoginPage';
-import {ConsolePage} from 'src/containers/ConsolePage';
-
-import {selectAuthData} from 'src/store/auth/selectors';
 import {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useRoutes} from 'react-router-dom';
+
+import {routesConfig} from 'src/routes/routes';
+
+import {selectAuthDataSessionKey} from 'src/store/auth/selectors';
 import {checkAuthenticate} from 'src/store/auth/slice';
+import {selectAppIsReady} from 'src/store/app/selector';
 
 const App = () => {
   const dispatch = useDispatch();
-  const authData = useSelector(selectAuthData);
-  const routes = useRoutes([
-    {
-      path: '/',
-      children: [
-        {
-          path: '/console',
-          element: authData?.sessionKey ? <ConsolePage /> : <Navigate to="/login" />,
-        },
-        {
-          path: '/login',
-          element: authData?.sessionKey ? <Navigate to="/console" /> : <LoginPage />,
-        },
-      ],
-    },
-  ]);
+
+  const sessionKey = useSelector(selectAuthDataSessionKey);
+  const appIsReady = useSelector(selectAppIsReady);
+
+  const routes = useRoutes(routesConfig(Boolean(sessionKey)));
 
   useEffect(() => {
     dispatch(checkAuthenticate());
   }, [dispatch]);
 
-  return <>{routes}</>;
+  return <>{appIsReady ? routes : <span className="App-loader">Loading...</span>}</>;
 };
 
 export {App};

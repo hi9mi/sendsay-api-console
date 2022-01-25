@@ -1,12 +1,14 @@
 import createSagaMiddleware from 'redux-saga';
 import {combineReducers, configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
+import {all} from 'redux-saga/effects';
 
 import {authReducer} from 'src/store/auth/slice';
-import {all} from 'redux-saga/effects';
-import {authSaga} from './auth/sagas';
+import {authSaga} from 'src/store/auth/sagas';
+import {appReducer} from 'src/store/app/slice';
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  app: appReducer,
 });
 
 function* rootSaga() {

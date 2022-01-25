@@ -1,0 +1,17 @@
+.HeaderLogo {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.HeaderLogo-icon {
+  width: 115px;
+  height: 30px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.HeaderLogo-title {
+  font-size: 20px;
+  font-weight: 400;
+}
