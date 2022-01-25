@@ -6,7 +6,7 @@ import {ConsolePageButton} from 'src/components/ConsolePage/ConsolePageButton';
 import {ConsolePageSvgSelector} from 'src/components/ConsolePage/ConsolePageSvgSelector';
 import {LogoutButton} from './components/LogoutButton';
 import {HeaderLogo} from './components/HeaderLogo';
-import {HeaderTextField} from './components/HeaderTextField';
+import {HeaderSublogin} from './components/HeaderSublogin';
 
 const Header = () => {
   const [isFullScreenMode, setFullScreenMode] = useState<boolean>(Boolean(document.fullscreenElement));
@@ -26,7 +26,7 @@ const Header = () => {
     <div className="Header">
       <HeaderLogo />
       <div className="Header-settings">
-        <HeaderTextField />
+        <HeaderSublogin />
         <LogoutButton />
         <ConsolePageButton onClick={toggleFullScreenMode}>
           <ConsolePageSvgSelector svgName={isFullScreenMode ? 'full-screen-enabled' : 'full-screen-disabled'} />
