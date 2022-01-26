@@ -1,5 +1,5 @@
 type ConsolePageSvgSelectorProps = {
-  svgName: 'full-screen-enabled' | 'full-screen-disabled' | 'formatting';
+  svgName: string;
 };
 
 const ConsolePageSvgSelector = ({svgName}: ConsolePageSvgSelectorProps) => {
@@ -39,6 +39,23 @@ const ConsolePageSvgSelector = ({svgName}: ConsolePageSvgSelectorProps) => {
             <path d="M12 14H7" stroke="#0D0D0D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M7 18H3" stroke="#0D0D0D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </g>
+        </svg>
+      );
+
+    case 'dropdown':
+      return (
+        <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="8" cy="3" r="2" fill="black" fillOpacity="0.2" />
+          <circle cx="8" cy="10" r="2" fill="black" fillOpacity="0.2" />
+          <circle cx="8" cy="17" r="2" fill="black" fillOpacity="0.2" />
+        </svg>
+      );
+
+    case 'circle':
+      return (
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="5" cy="5" r="5" fill="white" />
+          <circle cx="5" cy="5" r="4.5" stroke="black" strokeOpacity="0.2" />
         </svg>
       );
 
