@@ -1,35 +1,54 @@
-import {useEffect, useRef} from 'react';
-import {mockHistory} from 'src/containers/ConsolePage/mockData';
-import {RequestHistoryItem} from './components/RequestHistoryItem';
 import './RequestHistoryList.css';
 
-const RequestHistoryList = () => {
-  const listRef = useRef<HTMLUListElement>(null);
+import {memo, useEffect, useRef} from 'react';
+import {useSelector} from 'react-redux';
+
+import {RequestHistoryItem} from './components/RequestHistoryItem';
+
+import {selectConsoleRequestHistory} from 'src/store/console/selectors';
+import {Request} from 'src/store/console/slice';
+
+type RequestHistoryListProps = {
+  putRequestFromHistory: (historyRequest: Request) => void;
+  executeRequestFromHistory: (historyRequest: Request) => void;
+};
+
+const RequestHistoryList = memo(({putRequestFromHistory, executeRequestFromHistory}: RequestHistoryListProps) => {
+  const requestHistory = useSelector(selectConsoleRequestHistory);
+
+  const historyListRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    const listRefCurrent = listRef.current;
+    const historylistRefCurrent = historyListRef.current;
 
-    const scrollListener = (event: WheelEvent) => {
+    const wheelListener = (event: WheelEvent) => {
       event.preventDefault();
-      if (listRefCurrent) {
-        listRefCurrent.scrollLeft += event.deltaY;
+      if (historylistRefCurrent) {
+        historylistRefCurrent.scrollLeft += event.deltaY;
       }
     };
 
-    listRefCurrent?.addEventListener('wheel', scrollListener);
+    historylistRefCurrent?.addEventListener('wheel', wheelListener);
 
     return () => {
-      listRefCurrent?.removeEventListener('wheel', scrollListener);
+      historylistRefCurrent?.removeEventListener('wheel', wheelListener);
     };
   }, []);
 
   return (
-    <ul ref={listRef} className="RequestHistoryList">
-      {mockHistory.map((historyItem, index) => (
-        <RequestHistoryItem {...historyItem} key={index} />
+    <ul ref={historyListRef} className="RequestHistoryList">
+      {requestHistory?.map(({requestData, isValid, error}, index) => (
+        <RequestHistoryItem
+          requestData={requestData}
+          isValid={isValid}
+          putRequestFromHistory={putRequestFromHistory}
+          executeRequestFromHistory={executeRequestFromHistory}
+          error={error}
+          key={index}
+        />
       ))}
     </ul>
   );
-};
+});
 
 export {RequestHistoryList};

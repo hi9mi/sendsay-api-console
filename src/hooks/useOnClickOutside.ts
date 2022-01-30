@@ -1,6 +1,5 @@
 import {useEffect, useRef} from 'react';
 
-// eslint-disable-next-line no-unused-vars
 const useOnClickOutside = <T extends HTMLElement = HTMLElement>(onClick: (event: MouseEvent | TouchEvent) => void) => {
   const containerRef = useRef<T>(null);
 
@@ -9,7 +8,7 @@ const useOnClickOutside = <T extends HTMLElement = HTMLElement>(onClick: (event:
       const node = containerRef.current;
       const target = event.target;
 
-      if (target instanceof HTMLElement && (!node || node.contains(target) || target.closest('.Dropdown-item'))) {
+      if ((target instanceof HTMLElement || target instanceof SVGElement) && (node?.contains(target) || target.closest('.Dropdown-item'))) {
         return;
       }
       onClick(event);

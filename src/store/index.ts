@@ -4,15 +4,19 @@ import {all} from 'redux-saga/effects';
 
 import {authReducer} from 'src/store/auth/slice';
 import {authSaga} from 'src/store/auth/sagas';
+import {consoleSaga} from 'src/store/console/sagas';
 import {appReducer} from 'src/store/app/slice';
+import {consoleReducer} from 'src/store/console/slice';
+import {setLocalStorage} from 'src/utils';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   app: appReducer,
+  console: consoleReducer,
 });
 
 function* rootSaga() {
-  yield all([authSaga()]);
+  yield all([authSaga(), consoleSaga()]);
 }
 
 const saga = createSagaMiddleware();
@@ -25,6 +29,10 @@ const store = configureStore({
 });
 
 saga.run(rootSaga);
+
+store.subscribe(() => {
+  setLocalStorage('request_history', store.getState().console.requestHistory);
+});
 
 export {store};
 

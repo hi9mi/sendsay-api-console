@@ -1,39 +1,44 @@
 import './Header.css';
 
-import {useState} from 'react';
+import {memo} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 
-import {ConsolePageButton} from 'src/components/ConsolePage/ConsolePageButton';
-import {ConsolePageSvgSelector} from 'src/components/ConsolePage/ConsolePageSvgSelector';
-import {LogoutButton} from './components/LogoutButton';
-import {HeaderLogo} from './components/HeaderLogo';
-import {HeaderSublogin} from './components/HeaderSublogin';
+import {ToggleScreenModeButton} from './components/ToggleScreenModeButton';
 
-const Header = () => {
-  const [isFullScreenMode, setFullScreenMode] = useState<boolean>(Boolean(document.fullscreenElement));
+import {selectAuthDataSublogin} from 'src/store/auth/selectors';
+import {logoutAction} from 'src/store/auth/slice';
+import {HEADER_LOGO_TITLE, LOGOUT_BUTTON_TEXT} from './header.constants';
+import logoIcon from 'src/assets/logo.svg';
+import colonIcon from './assets/colon-icon.svg';
+import logoutIcon from './assets/log-out.svg';
 
-  const toggleFullScreenMode = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-      setFullScreenMode(true);
-    }
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-      setFullScreenMode(false);
-    }
+const Header = memo(() => {
+  const dispatch = useDispatch();
+  const sublogin = useSelector(selectAuthDataSublogin);
+
+  const logoutHandler = () => {
+    dispatch(logoutAction());
   };
 
   return (
     <div className="Header">
-      <HeaderLogo />
+      <div className="HeaderLogo">
+        <img src={logoIcon} alt="API-консолька" className="HeaderLogo-icon" />
+        <h1 className="HeaderLogo-title">{HEADER_LOGO_TITLE}</h1>
+      </div>
       <div className="Header-settings">
-        <HeaderSublogin />
-        <LogoutButton />
-        <ConsolePageButton onClick={toggleFullScreenMode}>
-          <ConsolePageSvgSelector svgName={isFullScreenMode ? 'full-screen-enabled' : 'full-screen-disabled'} />
-        </ConsolePageButton>
+        {Boolean(sublogin) && (
+          <span className="HeaderSublogin">
+            {sublogin} <img src={colonIcon} alt="" /> sublogin
+          </span>
+        )}
+        <button className="LogoutButton" onClick={logoutHandler}>
+          {LOGOUT_BUTTON_TEXT} <img src={logoutIcon} alt="Выйти из аккаунта" />
+        </button>
+        <ToggleScreenModeButton />
       </div>
     </div>
   );
-};
+});
 
 export {Header};

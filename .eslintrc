@@ -12,7 +12,7 @@
     "prettier/prettier": ["error", {}, {"usePrettierrc": true}],
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
-    "no-unused-vars": "error",
+    "no-unused-vars": "off",
     "@typescript-eslint/ban-types": [
       "error",
       {
@@ -29,7 +29,9 @@
         "extendDefaults": true
       }
     ],
-    "react/display-name": "off"
+    "react/display-name": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "jsx-a11y/no-static-element-interactions": "off"
   },
   "env": {
     "es6": true,

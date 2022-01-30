@@ -1,22 +1,27 @@
 import './RequestHistoryItem.css';
 
 import {useEffect, useRef, useState} from 'react';
+import {useDispatch} from 'react-redux';
 import clsx from 'clsx';
 
 import {Portal} from 'src/components/Portal';
 import {ConsolePageSvgSelector} from 'src/components/ConsolePage/ConsolePageSvgSelector';
 import {Dropdown} from '../Dropdown/Dropdown';
 
+import {removeHistoryRequest, Request, setResponse} from 'src/store/console/slice';
 import {useOnClickOutside} from 'src/hooks';
 
 type RequestHistoryItemProps = {
-  action: string;
-  id: string;
-  date: string;
-  res: string;
+  requestData: Request;
+  isValid: boolean;
+  putRequestFromHistory: (historyRequest: Request) => void;
+  executeRequestFromHistory: (historyRequest: Request) => void;
+  error?: string;
 };
 
-const RequestHistoryItem = ({action, res, id}: RequestHistoryItemProps) => {
+const RequestHistoryItem = ({requestData, isValid, putRequestFromHistory, executeRequestFromHistory, error}: RequestHistoryItemProps) => {
+  const dispatch = useDispatch();
+
   const [isVisibleDropdown, setVisibleDropdown] = useState<boolean>(false);
   const [offsetTop, setOffsetTop] = useState<number>(0);
   const [offsetLeft, setOffsetLeft] = useState<number>(0);
@@ -29,7 +34,8 @@ const RequestHistoryItem = ({action, res, id}: RequestHistoryItemProps) => {
 
   const wrapperRef = useOnClickOutside<HTMLLIElement>(closeDropdownHandler);
 
-  const toggleDropdownVisible = () => {
+  const toggleDropdownVisible = (event: React.MouseEvent<HTMLSpanElement, MouseEvent> | undefined = undefined) => {
+    event?.stopPropagation();
     setVisibleDropdown((currentIsVisibleDropdown) => !currentIsVisibleDropdown);
   };
 
@@ -39,9 +45,19 @@ const RequestHistoryItem = ({action, res, id}: RequestHistoryItemProps) => {
     }
   };
 
+  const putRequestFromHistoryHandler = () => {
+    putRequestFromHistory(requestData);
+    if (!error) {
+      dispatch(setResponse(null));
+    }
+    if (error) {
+      dispatch(setResponse({message: error, isValid: false}));
+    }
+  };
+
   const copyRequestHandler = () => {
     closeDropdownHandler();
-    navigator.clipboard.writeText(JSON.stringify({action, id}));
+    navigator.clipboard.writeText(JSON.stringify(requestData, undefined, 2));
     setAnimateCopyAlert(true);
     window.clearTimeout(timer.current);
     timer.current = window.setTimeout(() => {
@@ -50,19 +66,28 @@ const RequestHistoryItem = ({action, res, id}: RequestHistoryItemProps) => {
   };
 
   useEffect(() => {
-    if (wrapperRef.current) {
-      const wrapperRect = wrapperRef.current.getBoundingClientRect();
-      const top = wrapperRect.top + wrapperRect.height;
-      setOffsetTop(top);
-      setOffsetLeft(wrapperRect.left);
-    }
+    const wheelListener = () => {
+      if (wrapperRef.current) {
+        const wrapperRect = wrapperRef.current.getBoundingClientRect();
+        const top = wrapperRect.top + wrapperRect.height;
+        setOffsetTop(top);
+        setOffsetLeft(wrapperRect.left);
+      }
+    };
+    wheelListener();
+
+    window.addEventListener('wheel', wheelListener);
+    return () => window.removeEventListener('wheel', wheelListener);
   }, [wrapperRef]);
 
   const dropdownList = [
     {
       text: 'Выполнить',
       className: 'Dropdown-item--primary',
-      handler: closeDropdownHandler,
+      handler: () => {
+        executeRequestFromHistory(requestData);
+        closeDropdownHandler();
+      },
     },
     {
       text: 'Скопировать',
@@ -72,20 +97,24 @@ const RequestHistoryItem = ({action, res, id}: RequestHistoryItemProps) => {
     {
       text: 'Удалить',
       className: 'Dropdown-item--dangerous',
-      handler: closeDropdownHandler,
+      handler: () => {
+        dispatch(removeHistoryRequest(requestData.action));
+        closeDropdownHandler();
+      },
     },
   ];
 
   return (
     <li className="RequestHistoryItem--wrapper" ref={wrapperRef}>
       <button
+        onClick={putRequestFromHistoryHandler}
         className={clsx('RequestHistoryItem', {
-          isSuccess: res === 'success',
-          isInvalid: res === 'invalid',
+          isSuccess: isValid,
+          isInvalid: !isValid,
         })}
       >
         <ConsolePageSvgSelector svgName="circle" />
-        {action}
+        {requestData.action}
         {
           <span
             className={clsx('RequestHistoryItem-copyAlert', {

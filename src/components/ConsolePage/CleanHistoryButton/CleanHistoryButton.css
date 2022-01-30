@@ -15,6 +15,7 @@
 }
 
 .CleanHistoryButton::before {
+  pointer-events: none;
   position: absolute;
   left: -16px;
   top: 0;

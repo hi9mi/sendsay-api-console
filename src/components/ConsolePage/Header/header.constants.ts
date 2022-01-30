@@ -1,0 +1,4 @@
+const HEADER_LOGO_TITLE = 'API-консолька';
+const LOGOUT_BUTTON_TEXT = 'Выйти';
+
+export {HEADER_LOGO_TITLE, LOGOUT_BUTTON_TEXT};

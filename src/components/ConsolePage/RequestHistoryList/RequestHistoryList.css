@@ -9,10 +9,9 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
   padding: var(--container-padding);
+  width: calc(100% - 52px);
 }
 
 .RequestHistoryList::-webkit-scrollbar {
   display: none;
 }
-
-
