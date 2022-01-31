@@ -17,6 +17,7 @@ const initialState: AuthSliceState = {
 
 export const fetchAuthenticate = createAction<AuthValues>('auth/start');
 export const checkAuthenticate = createAction<void>('auth/check');
+export const logoutAction = createAction<void>('auth/logoutAction');
 
 export const authSlice = createSlice({
   name: 'auth',

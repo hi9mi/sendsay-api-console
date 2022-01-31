@@ -1,7 +1,7 @@
 .Button {
   background: linear-gradient(180deg, #45a6ff 0%, #0055fb 100%), #c4c4c4;
   border: none;
-  border-radius: 5px;
+  border-radius: var(--border-radius-main);
   color: #fff;
   font-size: 16px;
   font-weight: 500;

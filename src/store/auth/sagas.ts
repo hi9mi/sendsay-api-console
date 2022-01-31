@@ -1,7 +1,16 @@
 import {AnyAction, PayloadAction} from '@reduxjs/toolkit';
 import {call, CallEffect, put, PutEffect, takeLatest} from 'redux-saga/effects';
 
-import {authenticate, authenticateFailure, authenticatePending, checkAuthenticate, fetchAuthenticate, logout} from 'src/store/auth/slice';
+import {
+  authenticate,
+  authenticateFailure,
+  authenticatePending,
+  checkAuthenticate,
+  fetchAuthenticate,
+  logout,
+  logoutAction,
+} from 'src/store/auth/slice';
+import {setAppReady} from 'src/store/app/slice';
 import {SendsayCustom} from 'src/services/sendsay';
 import {AuthValues} from 'src/types/auth';
 
@@ -21,6 +30,8 @@ function* checkAuthenticateSaga(): Generator<PutEffect<AnyAction> | CallEffect<v
   } catch (error) {
     console.error('error', error);
     yield call(logoutSaga);
+  } finally {
+    yield put(setAppReady(true));
   }
 }
 
@@ -56,6 +67,7 @@ export function* logoutSaga() {
 function* authSaga() {
   yield takeLatest(fetchAuthenticate.type, authenticateSaga);
   yield takeLatest(checkAuthenticate.type, checkAuthenticateSaga);
+  yield takeLatest(logoutAction.type, logoutSaga);
 }
 
 export {authSaga};

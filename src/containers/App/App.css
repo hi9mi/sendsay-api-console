@@ -1,0 +1,7 @@
+.App-loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  font-size: 18px;
+  font-weight: 500;
+}

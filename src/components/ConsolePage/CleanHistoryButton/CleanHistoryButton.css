@@ -1,0 +1,26 @@
+.CleanHistoryButton {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  border: none;
+  background-color: #f6f6f6;
+  border-left: 1px solid var(--color-gray);
+  padding: 13px 13px 12px 14px;
+  cursor: pointer;
+}
+
+.CleanHistoryButton:focus {
+  outline: 1px solid var(--color-gray);
+}
+
+.CleanHistoryButton::before {
+  pointer-events: none;
+  position: absolute;
+  left: -16px;
+  top: 0;
+  content: '';
+  height: 100%;
+  width: 15px;
+  background: linear-gradient(269.93deg, #f6f6f6 0.06%, rgba(246, 246, 246, 0) 99.93%);
+}

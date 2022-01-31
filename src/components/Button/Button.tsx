@@ -6,7 +6,7 @@ import {WithChildren} from 'src/types/utility';
 import loader from './assets/loader.svg';
 
 type ButtonProps = WithChildren<{
-  isLoading: boolean;
+  isLoading?: boolean;
   classes?: string;
 }> &
   JSX.IntrinsicElements['button'];

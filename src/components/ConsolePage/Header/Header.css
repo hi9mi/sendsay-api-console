@@ -1,0 +1,68 @@
+.Header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  align-items: center;
+  padding: var(--container-padding);
+  background-color: #f6f6f6;
+  border-bottom: 1px solid var(--color-gray);
+}
+
+.Header-settings {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 5px;
+  align-items: center;
+  column-gap: 30px;
+}
+
+.HeaderLogo {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.HeaderLogo-icon {
+  width: 115px;
+  height: 30px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.HeaderLogo-title {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.HeaderSublogin {
+  height: 30px;
+  font-size: 16px;
+  line-height: 20px;
+  border: 1px solid var(--color-gray);
+  border-radius: var(--border-radius-main);
+  padding: 5px 15px;
+
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.LogoutButton {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  border: none;
+  border-radius: var(--border-radius-main);
+  background-color: transparent;
+  padding: 4px;
+
+  font-size: 16px;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.LogoutButton:focus {
+  outline: 2px solid var(--color-gray);
+}

@@ -1,0 +1,92 @@
+.RequestHistoryItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  padding: 5px 10px;
+  background-color: #fff;
+  border-radius: var(--border-radius-main);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+
+  color: inherit;
+  font-family: inherit;
+  font-size: 16px;
+  overflow: hidden;
+}
+
+.RequestHistoryItem:hover {
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+}
+.RequestHistoryItem:focus {
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  outline: none;
+}
+
+.RequestHistoryItem.isSuccess > svg > circle {
+  fill: #30b800;
+}
+.RequestHistoryItem.isInvalid > svg > circle {
+  fill: #cf2c00;
+}
+
+.RequestHistoryItem-menuIcon--wrapper > svg:hover > circle {
+  fill-opacity: 0.4;
+}
+
+.Dropdown-item--primary:hover > .Dropdown-item {
+  background-color: #0055fb;
+  color: #fff;
+}
+
+.Dropdown-item--dangerous {
+  position: relative;
+  margin-top: 10px;
+}
+
+.Dropdown-item--dangerous::before {
+  position: absolute;
+  content: '';
+  top: -5px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.Dropdown-item--dangerous:hover > .Dropdown-item {
+  background-color: #cf2c00;
+  color: #fff;
+}
+
+.RequestHistoryItem-copyAlert {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  font-size: 12px;
+  background: #f6f6f6;
+  border-radius: 5px;
+  height: 20px;
+  padding: 0 5px;
+  transition: transform 1s ease-in-out;
+}
+.RequestHistoryItem-copyAlert.isAnimate {
+  visibility: visible;
+  opacity: 1;
+  animation: infinite fade-in 1s;
+}
+
+@keyframes fade-in {
+  from {
+    transform: translate(-50%, -50%);
+  }
+  to {
+    transform: translate(-50%, -150%);
+  }
+}

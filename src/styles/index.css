@@ -1,3 +1,12 @@
+:root {
+  --container-padding: 10px 15px;
+  --color-black: #0d0d0d;
+  --color-gray: rgba(0, 0, 0, 0.2);
+  --color-light-black: rgba(0, 0, 0, 0.4);
+  --border-radius-main: 5px;
+  --color-blue: #0055fb;
+}
+
 *,
 *::before,
 *::after {
@@ -18,4 +27,6 @@ body {
   line-height: 1.5;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
     'Helvetica Neue', sans-serif;
+  color: var(--color-black);
+  overflow: hidden;
 }

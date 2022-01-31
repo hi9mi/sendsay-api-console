@@ -1,0 +1,43 @@
+.ConsoleTextarea--wrapper {
+  height: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.ConsoleTextarea-label {
+  position: absolute;
+  left: 0;
+  top: -20px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #999999;
+}
+
+.ConsoleTextarea-label.invalid {
+  color: #cf2c00;
+}
+
+.ConsoleTextarea {
+  height: 100%;
+  width: 100%;
+  resize: none;
+  font-family: Fira Code, Cascadia Code, JetBrains Mono, monospace;
+  color: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  border: 1px solid;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+.ConsoleTextarea.invalid {
+  border-color: #cf2c00;
+  box-shadow: 0px 0px 5px rgba(207, 44, 0, 0.5);
+}
+
+.ConsoleTextarea:focus {
+  outline: 1px solid var(--color-gray);
+}
+.ConsoleTextarea.invalid:focus {
+  outline: none;
+}

@@ -1,0 +1,42 @@
+.ConsoleInterface {
+  display: flex;
+  height: 100%;
+  overflow: auto;
+}
+
+.ConsoleInterface-tile {
+  min-width: 400px;
+  height: 100%;
+  min-height: 400px;
+}
+
+.ConsoleInterface-tile.request {
+  flex: 0 0 auto;
+  width: 50%;
+}
+
+.ConsoleInterface-tile.response {
+  max-width: 100%;
+  width: 100%;
+  flex: 1 1 0%;
+}
+
+.ConsoleInterface-tile.isResizing {
+  user-select: none;
+  pointer-events: none;
+}
+
+.ConsoleInterface-splitLine {
+  height: 100%;
+  width: 10px;
+  min-width: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: col-resize;
+}
+
+.ConsoleInterface-splitLine.isDragging svg g > circle,
+.ConsoleInterface-splitLine:hover svg g > circle {
+  fill-opacity: 0.4;
+}
