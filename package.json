@@ -1,5 +1,6 @@
 {
   "name": "sendsay-api-console",
+  "homepage": "https://gitname.github.io/sendsay-api-console/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -50,6 +51,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "gh-pages": "^3.2.3",
     "prettier": "^2.5.1"
   }
 }

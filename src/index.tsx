@@ -10,7 +10,7 @@ import {store} from 'src/store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+    <Router basename='/sendsay-api-console/'>
       <Provider store={store}>
         <App />
       </Provider>
