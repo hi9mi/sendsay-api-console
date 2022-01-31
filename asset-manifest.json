@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/sendsay-api-console/static/css/main.e082b1be.css",
+    "main.js": "/sendsay-api-console/static/js/main.a3a038d0.js",
+    "static/media/loader.svg": "/sendsay-api-console/static/media/loader.c91065d9ed6ed55a61c5de670e1bffe6.svg",
+    "index.html": "/sendsay-api-console/index.html",
+    "static/media/meh.svg": "/sendsay-api-console/static/media/meh.75def4a54309affdae3747f2b68cfce0.svg",
+    "static/media/log-out.svg": "/sendsay-api-console/static/media/log-out.3c9a7d7fe8113f33bd3817d33bbce99b.svg",
+    "static/media/colon-icon.svg": "/sendsay-api-console/static/media/colon-icon.d589e952ee9d78c37aa469d27a393441.svg",
+    "static/media/logo.svg": "/sendsay-api-console/static/media/logo.95a999c0362a22c99c811ec8720c9027.svg",
+    "static/media/cross.svg": "/sendsay-api-console/static/media/cross.3d9954da00640e5947cd5914101007e5.svg",
+    "main.e082b1be.css.map": "/sendsay-api-console/static/css/main.e082b1be.css.map",
+    "main.a3a038d0.js.map": "/sendsay-api-console/static/js/main.a3a038d0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e082b1be.css",
+    "static/js/main.a3a038d0.js"
+  ]
+}
