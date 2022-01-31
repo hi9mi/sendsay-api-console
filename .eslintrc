@@ -47,6 +47,7 @@
       "jsx": true
     }
   },
+  "ignorePatterns": ["/server.js"],
   "settings": {
     "react": {
       "version": "detect"
